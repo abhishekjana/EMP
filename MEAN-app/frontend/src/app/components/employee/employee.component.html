@@ -1,0 +1,226 @@
+<!-- this is for header -->
+<div
+  style="position: absolute; width: 100%; top: 0px; height: 4rem; z-index: 1"
+  class="container-fluid g-0"
+>
+  <app-header (sideNavToggled)="sideNavStatus = $event"></app-header>
+
+  <!-- sidebar -->
+  <main style="position: absolute; width: 100%; top: 4rem; z-index: 1">
+    <app-side-nav
+      style="
+        position: absolute;
+        left: 0rem;
+        width: 250px;
+        height: calc(100vh - 4rem);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        background-color: rgba(34, 34, 34, 1);
+        border-top: 1px solid white;
+      "
+    ></app-side-nav>
+    <app-side-nav
+      [sideNavStatus]="sideNavStatus"
+      [ngClass]="{ 'app-side-nav-open': sideNavStatus }"
+    ></app-side-nav>
+    <div
+      style="position: absolute; left: 250px; width: calc(100%-250px)"
+      class="display-area"
+    ></div>
+
+    <!-- this is for employee component part -->
+    <div
+      [ngClass]="{ 'display-area-shrink': sideNavStatus }"
+      style="position: absolute; margin-top: -13rem; width: 80%"
+      class="display-area p-3"
+      id="emp"
+    >
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Employee Management</h2>
+        </div>
+        <div class="col ml-auto text-right">
+          <button
+            type="button"
+            class="btn btn-outline-success"
+            (click)="onAddEmployee()"
+          >
+            Add Employee
+          </button>
+        </div>
+        <!-- <div class="col ml-auto text-right">
+    <button type="button" class="btn btn-outline-danger" (click)="logout()">
+      Logout
+    </button>
+  </div> -->
+      </div>
+      <hr />
+      <!-- For custom search filter -->
+
+      <div class="row">
+        <div>
+          <input
+            type="text"
+            class="form-control mb-4"
+            placeholder="Search"
+            id="listSearch"
+            [(ngModel)]="SearchData"
+          />
+        </div>
+        <div
+          class="col-md-4"
+          *ngFor="let item of employees | searchFilter: SearchData"
+        >
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <h6 class="card-subtitle mb-2 text-success">
+                {{ item.position }}
+              </h6>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'badge-success': item.dept == 'Design',
+                  'badge-danger': item.dept != 'Design'
+                }"
+                >{{ item.dept }}</span
+              >
+              <hr />
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-primary"
+                (click)="onEditEmployee(item)"
+              >
+                Edit</button
+              >&nbsp;
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-danger"
+                (click)="onDeleteEmployee(item._id)"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Model -->
+<div class="modal fade show" [class.show]="showModal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ editMode ? "Update" : "Add" }} Employee</h5>
+        <button
+          (click)="onCloseModal()"
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="empForm" (ngSubmit)="onEmpSubmit()">
+        <div class="modal-body">
+          <div class="form-group mb-3">
+            <label>Enter Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              placeholder="name"
+            />
+            <small
+              *ngIf="!empForm.get('name').valid && empForm.get('name').touched"
+              class="form-text text-danger"
+              >Please Enter Name.</small
+            >
+          </div>
+          <div class="form-group mb-3">
+            <label>Enter position</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="position"
+              placeholder="Ex-Full Stack Developer/Tester/Support"
+            />
+            <small
+              *ngIf="
+                !empForm.get('position').valid &&
+                empForm.get('position').touched
+              "
+              class="form-text text-danger"
+              >Please Enter position.</small
+            >
+          </div>
+          <div class="form-group">
+            <label>Enter Department</label>
+            <select class="custom-select" formControlName="dept">
+              <option value="Design">Design</option>
+              <option value="Development">Development</option>
+            </select>
+          </div>
+          <!-- Adding task -->
+          <div class="form-group mb-3">
+            <label>Enter task</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="task"
+              placeholder="task"
+            />
+          </div>
+          <!-- tasks end -->
+          <!-- DueDate starts -->
+          <div class="form-group mb-3">
+            <label>Enter Due Date</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="dueDate"
+              placeholder="yyyy-mm-dd"
+            />
+          </div>
+          <!-- due date ends -->
+          <!-- taskCompletionStatus starts -->
+          <div class="form-group mb-3">
+            <label>Task completion Status</label>
+            <input
+              type="radio"
+              value="pending"
+              formControlName="taskCompletionStatus"
+              id="taskCompletionStatus"
+              name="taskCompletionStatus"
+            />
+            pending
+            <input
+              type="radio"
+              value="completed"
+              formControlName="taskCompletionStatus"
+              id="taskCompletionStatus"
+              name="taskCompletionStatus"
+            />
+            completed
+          </div>
+          <!-- taskCompletionStatus ends -->
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            (click)="onCloseModal()"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">
+            {{ editMode ? "Update Employee" : "Add Employee" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

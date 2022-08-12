@@ -1,0 +1,131 @@
+<!-- <div class="form-group">
+  <h3>User Register</h3>
+  <form [formGroup]="registerForm" (ngSubmit)="userRegister()">
+    <input type="text" placeholder="Enter your Name" formControlName="name" />
+    <input
+      type="email"
+      placeholder="Enter your Email"
+      formControlName="email"
+    />
+    <input
+      type="password"
+      placeholder="Enter your password"
+      formControlName="password"
+    />
+
+    <input type="submit" value="Register" [disabled]="!registerForm.valid" />
+  </form>
+</div> -->
+
+<!-- Next -->
+<!-- For adding header -->
+<nav class="navbar navbar-expand navbar-dark bg-dark px-2">
+  <div style="margin-left: 10px" class="container">
+    <a class="navbar-brand" routerLink="/home">Employee Management App</a>
+
+    <div style="position: absolute; margin-left: '1100px'">
+      <a class="navbar-brand" routerLink="/home">WELCOME TO EMS</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="true"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header ends -->
+<div class="d-flex justify-content-center">
+  <h3 style="text-align: 50%">User Register</h3>
+  <form
+    style="border: thin black solid; margin: 20px; padding: 20px; width: 50%"
+    [formGroup]="registerForm"
+    (ngSubmit)="userRegister()"
+  >
+    <div class="form-group">
+      <label for="name">Enter Your Name</label>
+      <input
+        formControlName="name"
+        type="name"
+        class="form-control"
+        id="exampleInputName"
+        aria-describedby="nameHelp"
+        placeholder="Enter your Name"
+      />
+      <small
+        *ngIf="
+          !registerForm.get('name').valid && registerForm.get('name').touched
+        "
+        class="form-text text-danger"
+        >Please Enter Name.</small
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input
+        formControlName="email"
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        placeholder="Enter your Email"
+      />
+      <small
+        *ngIf="
+          !registerForm.get('email').valid && registerForm.get('email').touched
+        "
+        class="form-text text-danger"
+        >Please Enter Name.</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        formControlName="password"
+        placeholder="Enter your Password"
+      />
+      <small
+        *ngIf="
+          !registerForm.get('name').valid && registerForm.get('name').touched
+        "
+        class="form-text text-danger"
+        >Please Enter Name.</small
+      >
+    </div>
+    <input type="submit" value="Register" [disabled]="!registerForm.valid" />
+    <!-- <button class="btn btn-success btn-lg float-right" type="submit"> -->
+    <div class="form-group">
+      <button
+        class="btn btn-primary btn-lg float-right mt-3 mx-"
+        type="submit"
+        routerLink="/login"
+      >
+        Already registered ?
+      </button>
+    </div>
+  </form>
+</div>

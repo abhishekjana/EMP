@@ -1,0 +1,83 @@
+<!-- this is for header -->
+<div
+  style="position: fixed; width: 100%; top: 0px; height: 4rem; z-index: 1"
+  class="container-fluid g-0"
+>
+  <app-header (sideNavToggled)="sideNavStatus = $event"></app-header>
+
+  <!-- sidebar -->
+  <main style="position: absolute; width: 100%; top: 4rem; z-index: 1">
+    <app-side-nav
+      style="
+        position: absolute;
+        left: 0rem;
+        width: 220px;
+        height: calc(100vh - 4rem);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        background-color: rgba(34, 34, 34, 1);
+        border-top: 1px solid white;
+      "
+    ></app-side-nav>
+    <app-side-nav
+      [sideNavStatus]="sideNavStatus"
+      [ngClass]="{ 'app-side-nav-open': sideNavStatus }"
+    ></app-side-nav>
+    <div
+      style="position: absolute; left: 250px; width: calc(100%-250px)"
+      class="display-area"
+    ></div>
+    <!-- Content will be here -->
+    <div
+      [ngClass]="{ 'display-area-shrink': sideNavStatus }"
+      style="position: fixed; margin-top: -10rem"
+      class="container py-3"
+    >
+      <div class="row">
+        <div class="col-md-10">
+          <div class="container">
+            <div class="row">
+              <div>
+                <h4 class="text-center">About</h4>
+                <p class="text-muted">
+                  This appliaction is designed for maintaining the employee
+                  information. It helps create an environment that encourages
+                  communication and keeps employees and managers working
+                  together to meet company goals. A positive relationship
+                  between employees and managers leads to better productivity,
+                  more efficiency, less conflict and better retention
+                </p>
+
+                <strong>Employee</strong>
+                <p class="text-muted">
+                  It consists of all the employee in this application.This
+                  component is basically for the employees.
+                </p>
+                <strong>Admin-console</strong>
+                <p>This component is only available for the Admin user</p>
+                <p class="text-muted">
+                  This component can be accessed by the admin and not the user.
+                  Admin can perform addition of new employee ,deletion of
+                  employee and even edit of existing employee.
+                </p>
+                <strong>Tasks</strong>
+                <p class="text-muted">
+                  This consists of tasks alloted to each employee.User should
+                  mark the task completed or pending.
+                </p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4>Contact</h4>
+                <ul class="list-unstyled">
+                  <li><a href="#">Follow on Twitter</a></li>
+                  <li><a href="#">Like on Facebook</a></li>
+                  <li><a href="#">Email me</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Content will be here -->
+  </main>
+</div>

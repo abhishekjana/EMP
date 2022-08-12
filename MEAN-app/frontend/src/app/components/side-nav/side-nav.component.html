@@ -1,0 +1,84 @@
+<div *ngIf="isAdmin">
+  <div
+    style="
+      color: white;
+      width: 230px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+    "
+    class="side-nav-content"
+  >
+    <ul
+      style="height: 100%; padding: 0%; margin-bottom: 0%; list-style: none"
+      class="nav-list"
+      [ngClass]="{ 'nav-list-open': sideNavStatus }"
+    >
+      <!-- <li class="nav-list-item" *ngFor="let item of list"> -->
+      <li class="nav-list-item">
+        <i></i>
+        <span>
+          <a href="#" [routerLink]="['/homeAfterlogin']">HOME</a>
+        </span>
+      </li>
+      <li class="nav-list-item">
+        <i></i>
+        <span>
+          <a href="#" [routerLink]="['/employee']">EMPLOYEE</a>
+        </span>
+      </li>
+      <li class="nav-list-item">
+        <i></i>
+        <span>
+          <a href="#" [routerLink]="['/admin']">ADMIN-CONSOLE</a>
+        </span>
+      </li>
+      <li class="nav-list-item">
+        <i></i>
+        <span>
+          <a href="#" [routerLink]="['/tasks']">TASKS</a>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="!isAdmin">
+  <div
+    style="
+      color: white;
+      width: 230px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-top: 10px;
+    "
+    class="side-nav-content"
+  >
+    <ul
+      style="height: 100%; padding: 0%; margin-bottom: 0%; list-style: none"
+      class="nav-list"
+      [ngClass]="{ 'nav-list-open': sideNavStatus }"
+    >
+      <!-- <li class="nav-list-item" *ngFor="let item of list"> -->
+      <li class="nav-list-item">
+        <i></i>
+        <span>
+          <a href="#" [routerLink]="['/homeAfterlogin']">HOME</a>
+        </span>
+      </li>
+      <li class="nav-list-item">
+        <i></i>
+        <span>
+          <a href="#" [routerLink]="['/employee']">EMPLOYEE</a>
+        </span>
+      </li>
+
+      <li class="nav-list-item">
+        <i></i>
+        <span>
+          <a href="#" [routerLink]="['/tasks']">TASKS</a>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark px-2">
+  <div class="side-nav-button p-2 me-3 text-light" (click)="SideNavToggle()">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+
+  <div class="navbar-collapse">
+    <ul class="navbar-nav me-auto">
+      <!-- this is for the dropdown menu -->
+      <li class="nav-item dropdown">
+        <a
+          href="#"
+          role="button"
+          class="nav-link dropdown-toggle"
+          data-bs-toggle="dropdown"
+          >Menu</a
+        >
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item" href="#">Contact</a></li>
+          <li><a class="dropdown-item" href="#">About Us</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+
+  <button class="btn btn-outline-light" (click)="logout()">Logout</button>
+</nav>
